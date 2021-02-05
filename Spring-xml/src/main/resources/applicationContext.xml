@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 通过xml的方式管理组件 -->
+	<!-- 
+		bean:管理每个对象组件
+		  id:唯一标识
+		  class:全类名，根据反射创建类的对象
+		property:为类中的属性装配值
+		  name:类中的属性名，准确的来说是set后面的属性名
+		  ref:当前容器中某个对象的id值
+	-->
+	<!-- <bean id="employeeDao" class="com.aura.spring.dao.EmployeeDAOImpl"></bean> -->
+	<!-- 如果需要更换dao实现类，直接修改实现类全类名即可 -->
+	<bean id="employeeDao" class="com.aura.spring.dao.EmployeeDAOMybatisImpl"></bean>
+	<bean id="employeeService" class="com.aura.spring.service.EmployeeService">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+	
+	<bean id="employeeHandler" class="com.aura.spring.handler.EmployeeHandler">
+		<property name="employeeService" ref="employeeService"></property>
+	</bean>
+</beans>
