@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- SpringMVC前端控制器 DispatcherServlet，SpringMVC程序的入口 -->
+	<!-- 只要启动服务器，springmvc的容器就创建好了 -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 初始化参数
+			通过contextConfigLocation指定springmvc的配置文件.
+			classpath:spring中才有的语法。从类路径下读取指定文件。
+		 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc.xml</param-value>
+		</init-param>
+		<!-- 
+			指定servlet的创建时机。
+			默认情况下：servlet会在请求到达时创建。
+			通过load-on-startup可以使得servlet在服务器启动时就被创建。
+		 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<!-- 
+			匹配规则：
+			精确匹配：/xxx  如 /login
+			后缀匹配：如   *.do *.a
+			通配符匹配：如  /* 
+		 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
